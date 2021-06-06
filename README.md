@@ -1,4 +1,5 @@
 # MyPronoun
+[![](https://img.shields.io/badge/requires-EnderLibs-blue.svg?logo=github)](https://github.com/EnderGamingFilms/EnderLibs)
 [![](https://img.shields.io/badge/Subscribe-on%20Youtube-red.svg?logo=youtube)](https://youtube.com/endergamingfilms)
 ![](https://img.shields.io/github/v/release/EnderGamingFilms/MyPronoun)
 [![](https://img.shields.io/github/issues/EnderGamingFilms/MyPronoun)](https://github.com/EnderGamingFilms/MyPronoun/issues)
