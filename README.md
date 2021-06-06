@@ -6,7 +6,7 @@
 
 MyPronoun is a Spigot plugin that allows user to select a prefered pronoun. This pronoun can be accessed via [PlaceholderAPI](https://www.spigotmc.org/resources/placeholderapi.6245/).
 
-# Installation for Development
+# Installation
 
 Install on your server along with **PAPI** and you're ready to use it. (Placeholder below)
 #### `%mypronoun_pronoun%`
