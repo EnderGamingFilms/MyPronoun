@@ -4,7 +4,7 @@
 ![](https://img.shields.io/github/v/release/EnderGamingFilms/MyPronoun)
 [![](https://img.shields.io/github/issues/EnderGamingFilms/MyPronoun)](https://github.com/EnderGamingFilms/MyPronoun/issues)
 
-MyPronoun is a Spigot plugin that allows user to select a prefered pronoun. This pronoun can be accessed via [PlaceholderAPI](https://www.spigotmc.org/resources/placeholderapi.6245/).
+MyPronoun is a Spigot plugin that allows user to select a preferred pronoun. This pronoun can be accessed via [PlaceholderAPI](https://www.spigotmc.org/resources/placeholderapi.6245/).
 
 # Installation
 
