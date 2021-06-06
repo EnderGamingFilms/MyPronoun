@@ -16,11 +16,9 @@ public class OnPlayerJoin implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         // Check if player is in the database
-        if (!plugin.getStorageHelper().playerExists(event.getPlayer().getUniqueId())) {
+        if (!plugin.getStorageHelper().playerExists(event.getPlayer().getUniqueId()) || plugin.getStorageHelper().getPronounID(event.getPlayer().getUniqueId()) == -1) {
             // If not prompt user to select pronoun from GUI
-            System.out.println("--> player does not exist in database");
             plugin.getStorageHelper().createPlayer(event.getPlayer().getUniqueId());
-            System.out.println("--> Here is when the GUI would open...");
             event.getPlayer().openInventory(plugin.getGuiManager().getGUI(-1));
         }
     }

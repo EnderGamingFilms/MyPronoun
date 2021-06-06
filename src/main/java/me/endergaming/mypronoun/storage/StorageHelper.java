@@ -11,6 +11,8 @@ import org.jetbrains.annotations.NotNull;
 import java.io.File;
 import java.util.UUID;
 
+import static me.endergaming.mypronoun.MyPronoun.log;
+
 public class StorageHelper {
     private final MyPronoun plugin;
     protected SQLHelper sql;
@@ -30,7 +32,7 @@ public class StorageHelper {
             ConfigurationSection config = plugin.getConfigController().getConfig().getConfigurationSection("MySQL");
 
             if (config == null) {
-                MessageUtils.log(MessageUtils.LogLevel.SEVERE, "There was an issue setting up MySQL");
+                log(MessageUtils.LogLevel.SEVERE, "There was an issue setting up MySQL");
                 return;
             }
 
@@ -47,7 +49,15 @@ public class StorageHelper {
         }
 
         createTable();
-//        playerCache = sql.createCache("my_pronoun", "pronoun_id", "uuid");
+
+        playerCache = createCache();
+
+        sql.setCommitInterval(plugin.getConfigController().getConfig().getInt("Update") == 0 ? -1 : plugin.getConfigController().getConfig().getInt("Update"));
+
+        if (isConnected())
+            log(MessageUtils.LogLevel.INFO, "&aDatabase connected");
+        else
+            log(MessageUtils.LogLevel.SEVERE, "&cFailed to connect to storage database");
     }
 
     public boolean isConnected() {
@@ -64,23 +74,37 @@ public class StorageHelper {
 
     public void createPlayer(UUID uuid) {
         if (!playerExists(uuid)) {
-            sql.execute("INSERT OR IGNORE INTO my_pronoun (uuid,pronoun_id) VALUES (?,?)", uuid, String.valueOf(3));
+            // Commit cache, add player, then create new cache
+            sql.execute("INSERT OR IGNORE INTO my_pronoun (uuid,pronoun_id) VALUES (?,?)", uuid, String.valueOf(-1));
+            sql.commit();
+            playerCache = createCache();
         }
     }
 
     public boolean playerExists(UUID uuid) {
-        return !sql.queryResults("SELECT * FROM my_pronoun WHERE uuid=?", uuid).isEmpty();
+        return !(playerCache.<Integer>select(uuid) == null);
+//        return !sql.queryResults("SELECT * FROM my_pronoun WHERE uuid=?", uuid).isEmpty();
     }
 
     public void setPronoun(UUID uuid, int pronounID) {
-        sql.execute("UPDATE my_pronoun SET pronoun_id=? WHERE uuid=?", pronounID, uuid);
+        playerCache.update(pronounID, uuid);
+//        sql.execute("UPDATE my_pronoun SET pronoun_id=? WHERE uuid=?", pronounID, uuid);
     }
 
     public int getPronounID(UUID uuid) {
-        return sql.querySingleResultLong("SELECT pronoun_id FROM my_pronoun WHERE uuid=?", uuid).intValue();
+        return playerCache.<Integer>select(uuid);
+//        return sql.querySingleResultLong("SELECT pronoun_id FROM my_pronoun WHERE uuid=?", uuid).intValue();
     }
 
     public void clearTable() {
         sql.execute("TRUNCATE TABLE my_pronoun");
+    }
+
+    public SQLCache getPlayerCache() {
+        return playerCache;
+    }
+
+    private SQLCache createCache() {
+        return sql.createCache("my_pronoun", "pronoun_id", "uuid");
     }
 }

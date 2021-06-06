@@ -1,0 +1,7 @@
+pronoun_changed: "&bYou changed your pronoun to %pronoun%"
+reopen_command: "&cYou didn't pick a pronoun, you can reopen the gui with /pn"
+not_selected: "&dYou have not selected a &npronoun&d yet! &cRun /pn to pick one."
+other_not_selected: "&eThis player has not selected a pronoun yet!"
+get_command: "&a%player% pronouns are %pronoun%"
+get_error: "&cThere was an error getting this players pronouns"
+no_player: "&cPlease provide a player."

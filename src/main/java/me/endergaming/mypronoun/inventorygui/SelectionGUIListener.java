@@ -1,14 +1,18 @@
 package me.endergaming.mypronoun.inventorygui;
 
+import me.endergaming.enderlibs.text.MessageUtils;
 import me.endergaming.mypronoun.MyPronoun;
-import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
+
+import static me.endergaming.mypronoun.controllers.ResponseController.*;
 
 public class SelectionGUIListener implements Listener {
     private final MyPronoun plugin;
@@ -30,10 +34,20 @@ public class SelectionGUIListener implements Listener {
             PersistentDataContainer container = clickedItem.getItemMeta().getPersistentDataContainer();
             if (!container.has(plugin.getPronounKey(), PersistentDataType.INTEGER)) return;
             int pronounID = container.get(plugin.getPronounKey(), PersistentDataType.INTEGER) == null ? 3 : container.get(plugin.getPronounKey(), PersistentDataType.INTEGER);
-            plugin.getStorageHelper().setPronoun(event.getWhoClicked().getUniqueId(), pronounID);
-            // TODO: Send success messages
+            Player player = (Player) event.getWhoClicked();
+            plugin.getStorageHelper().setPronoun(player.getUniqueId(), pronounID);
+            MessageUtils.send(player, replace(PRONOUN_CHANGED, player));
             // Close inventory
-            event.getWhoClicked().closeInventory();
+            player.closeInventory();
+
+        }
+    }
+
+    @EventHandler
+    public void onInventoryClose(InventoryCloseEvent event) {
+        if (!event.getView().getTitle().contains(SelectionGUI.inventory_name)) return;
+        if (plugin.getStorageHelper().getPronounID(event.getPlayer().getUniqueId()) == -1) {
+            MessageUtils.send(event.getPlayer(), REOPEN_COMMAND);
         }
     }
 }

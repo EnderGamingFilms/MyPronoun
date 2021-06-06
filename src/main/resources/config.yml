@@ -10,7 +10,7 @@ pronouns:
     display: PINK_STAINED_GLASS_PANE
     position: 13
   3:
-    pronoun: "Them/They"
+    pronoun: "They/Them"
     color: "&e"
     display: ORANGE_STAINED_GLASS_PANE
     position: 15
@@ -25,6 +25,9 @@ MySQL:
   Username: "root"
   Password: ""
   useSSL: false
+
+# SQL Settings - Set to -1 to disable
+Update: 78000
 
 # DEBUG - DO NOT TOUCH!
 debug: false

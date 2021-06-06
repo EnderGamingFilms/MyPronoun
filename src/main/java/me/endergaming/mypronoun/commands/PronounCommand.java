@@ -1,16 +1,19 @@
 package me.endergaming.mypronoun.commands;
 
 import me.endergaming.enderlibs.command.MainCommand;
-import me.endergaming.enderlibs.command.SubCommand;
 import me.endergaming.enderlibs.text.MessageUtils;
+import me.endergaming.enderlibs.util.PluginUtils;
 import me.endergaming.mypronoun.MyPronoun;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -68,6 +71,12 @@ public class PronounCommand extends MainCommand {
                     .map(String::toLowerCase)
                     .filter(s -> s.startsWith(args[0].toLowerCase()))
                     .collect(Collectors.toList());
+        }
+
+        if (args.length == 2) {
+            if (args[0].equalsIgnoreCase("get")) {
+                return Bukkit.getOnlinePlayers().stream().map(HumanEntity::getName).collect(Collectors.toList());
+            }
         }
         return null;
     }

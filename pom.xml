@@ -6,7 +6,7 @@
 
     <groupId>me.endergaming</groupId>
     <artifactId>MyPronoun</artifactId>
-    <version>0.1.0</version>
+    <version>0.2.0</version>
     <packaging>jar</packaging>
 
     <name>MyPronoun</name>
@@ -65,6 +65,10 @@
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>
         </repository>
+        <repository>
+            <id>placeholderapi</id>
+            <url>http://repo.extendedclip.com/content/repositories/placeholderapi/</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -77,7 +81,13 @@
         <dependency>
             <groupId>com.github.EnderGamingFilms</groupId>
             <artifactId>EnderLibs</artifactId>
-            <version>087c7d048b</version>
+            <version>23f52a52d1</version>
+        </dependency>
+        <dependency>
+            <groupId>me.clip</groupId>
+            <artifactId>placeholderapi</artifactId>
+            <version>2.10.9</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>
