@@ -1,0 +1,30 @@
+pronouns:
+  1:
+    pronoun: "He/Him"
+    color: "&b"
+    display: BLUE_STAINED_GLASS_PANE
+    position: 11
+  2:
+    pronoun: "She/Her"
+    color: "&c"
+    display: PINK_STAINED_GLASS_PANE
+    position: 13
+  3:
+    pronoun: "Them/They"
+    color: "&e"
+    display: ORANGE_STAINED_GLASS_PANE
+    position: 15
+
+# Storage type, must be SQLITE or MYSQL
+Storage: SQLITE
+
+MySQL:
+  Host: "localhost"
+  Port: 3306
+  Database: "minecraft"
+  Username: "root"
+  Password: ""
+  useSSL: false
+
+# DEBUG - DO NOT TOUCH!
+debug: false
