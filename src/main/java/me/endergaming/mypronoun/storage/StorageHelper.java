@@ -87,11 +87,15 @@ public class StorageHelper {
     }
 
     public void setPronoun(UUID uuid, int pronounID) {
+        if (!playerExists(uuid)) createPlayer(uuid);
         playerCache.update(pronounID, uuid);
 //        sql.execute("UPDATE my_pronoun SET pronoun_id=? WHERE uuid=?", pronounID, uuid);
     }
 
     public int getPronounID(UUID uuid) {
+        if (!playerExists(uuid)) createPlayer(uuid);
+        Object mem = playerCache.select(uuid);
+        if (mem == null) return -1;
         return playerCache.<Integer>select(uuid);
 //        return sql.querySingleResultLong("SELECT pronoun_id FROM my_pronoun WHERE uuid=?", uuid).intValue();
     }

@@ -36,7 +36,7 @@ public class SelectionGUIListener implements Listener {
             int pronounID = container.get(plugin.getPronounKey(), PersistentDataType.INTEGER) == null ? 3 : container.get(plugin.getPronounKey(), PersistentDataType.INTEGER);
             Player player = (Player) event.getWhoClicked();
             plugin.getStorageHelper().setPronoun(player.getUniqueId(), pronounID);
-            MessageUtils.send(player, replace(PRONOUN_CHANGED, player));
+            MessageUtils.send(player, replace(PRONOUN_CHANGED, pronounID));
             // Close inventory
             player.closeInventory();
 

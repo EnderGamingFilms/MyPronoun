@@ -31,6 +31,13 @@ public class ResponseController {
         return message;
     }
 
+    public static String replace(String message, int ID) {
+        Pronoun pronoun = JavaPlugin.getPlugin(MyPronoun.class).getConfigController().getPronounByID(ID);
+        if (pronoun != null)
+            message = message.replaceAll("%pronoun%", pronoun.getPronoun());
+        return message;
+    }
+
     public void init() {
         config = plugin.getFileManager().getConfig("messages.yml");
         // Parse teams
