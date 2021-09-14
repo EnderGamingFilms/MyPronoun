@@ -6,13 +6,13 @@
 
     <groupId>me.endergaming</groupId>
     <artifactId>MyPronoun</artifactId>
-    <version>0.2.1</version>
+    <version>0.2.2</version>
     <packaging>jar</packaging>
 
     <name>MyPronoun</name>
 
     <properties>
-        <java.version>1.11</java.version>
+        <java.version>16</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -87,7 +87,7 @@
         <dependency>
             <groupId>com.github.EnderGamingFilms</groupId>
             <artifactId>EnderLibs</artifactId>
-            <version>fcaac5a250</version>
+            <version>0.2.1</version>
         </dependency>
         <dependency>
             <groupId>me.clip</groupId>

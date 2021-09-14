@@ -1,6 +1,7 @@
 package me.endergaming.mypronoun.commands;
 
 import me.endergaming.enderlibs.command.MainCommand;
+import me.endergaming.enderlibs.file.Responses;
 import me.endergaming.enderlibs.text.MessageUtils;
 import me.endergaming.enderlibs.util.PluginUtils;
 import me.endergaming.mypronoun.MyPronoun;
@@ -12,13 +13,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static me.endergaming.enderlibs.file.config.CoreMessages.INVALID_PERMISSION;
-import static me.endergaming.enderlibs.file.config.CoreMessages.NON_PLAYER;
 
 public class PronounCommand extends MainCommand {
     public PronounCommand(@NotNull JavaPlugin plugin, String command) {
@@ -35,13 +32,13 @@ public class PronounCommand extends MainCommand {
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         // Do permission check
         if (!sender.hasPermission(permission)) {
-            MessageUtils.send(sender, INVALID_PERMISSION);
+            MessageUtils.send(sender, Responses.INVALID_PERMISSION);
             return true;
         }
         // Player Check
         if (playerOnly) {
             if (!(sender instanceof Player)) {
-                MessageUtils.send(sender, NON_PLAYER);
+                MessageUtils.send(sender, Responses.NON_PLAYER);
                 return true;
             }
         }

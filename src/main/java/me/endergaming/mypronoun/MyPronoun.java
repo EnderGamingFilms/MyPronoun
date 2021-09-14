@@ -16,7 +16,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class MyPronoun extends JavaPlugin {
     private final CommandRegistry commandRegistry = new CommandRegistry(this);
-    private FileManager fileManager = new FileManager(this);
     private ConfigController configController = new ConfigController(this);
     private ResponseController responseController = new ResponseController(this);
     private StorageHelper storageHelper = new StorageHelper(this);
@@ -38,7 +37,6 @@ public final class MyPronoun extends JavaPlugin {
         }
         // Setup Files
         try {
-            fileManager.registerConfig("config.yml","messages.yml");
             configController.init();
             responseController.init();
             log(MessageUtils.LogLevel.INFO, "&dSetting up configs &f(2/4)");
@@ -67,10 +65,6 @@ public final class MyPronoun extends JavaPlugin {
         storageHelper.getSql().commit();
         storageHelper.getSql().close();
         listenerManager.unregisterAll();
-    }
-
-    public FileManager getFileManager() {
-        return fileManager;
     }
 
     public ConfigController getConfigController() {

@@ -1,5 +1,6 @@
 package me.endergaming.mypronoun.controllers;
 
+import me.endergaming.enderlibs.file.FileManager;
 import me.endergaming.mypronoun.MyPronoun;
 import me.endergaming.mypronoun.storage.Pronoun;
 import me.endergaming.mypronoun.storage.StorageType;
@@ -26,7 +27,7 @@ public class ConfigController {
     }
 
     public void init() {
-        config = plugin.getFileManager().getConfig("config.yml");
+        config = FileManager.getConfig("config", "yml");
         this.readConfig();
     }
 

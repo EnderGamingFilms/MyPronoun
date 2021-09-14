@@ -1,9 +1,9 @@
 package me.endergaming.mypronoun.commands;
 
 import me.endergaming.enderlibs.command.SubCommand;
+import me.endergaming.enderlibs.file.Responses;
 import me.endergaming.enderlibs.text.MessageUtils;
 import me.endergaming.mypronoun.MyPronoun;
-import me.endergaming.mypronoun.controllers.ResponseController;
 import me.endergaming.mypronoun.storage.Pronoun;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -12,7 +12,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
-import static me.endergaming.enderlibs.file.config.CoreMessages.INVALID_PLAYER;
 import static me.endergaming.mypronoun.controllers.ResponseController.*;
 
 public class GetPronoun extends SubCommand {
@@ -29,7 +28,7 @@ public class GetPronoun extends SubCommand {
         } else if (args.length > 1) {
             Player player1 = Bukkit.getPlayer(args[1]);
             if (player1 == null) {
-                MessageUtils.send(player, INVALID_PLAYER);
+                MessageUtils.send(player, Responses.INVALID_PLAYER);
                 return;
             }
             int pronounID = plugin.getStorageHelper().getPronounID(player.getUniqueId());
