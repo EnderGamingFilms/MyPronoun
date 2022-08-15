@@ -3,7 +3,6 @@ package me.endergaming.mypronoun.commands;
 import me.endergaming.enderlibs.command.MainCommand;
 import me.endergaming.enderlibs.file.Responses;
 import me.endergaming.enderlibs.text.MessageUtils;
-import me.endergaming.enderlibs.util.PluginUtils;
 import me.endergaming.mypronoun.MyPronoun;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -25,6 +24,9 @@ public class PronounCommand extends MainCommand {
     @Override
     public void run(CommandSender sender, Command cmd, String label, String[] args) {
         Player player = (Player) sender;
+
+        System.out.println("Ran pn");
+
         player.openInventory(JavaPlugin.getPlugin(MyPronoun.class).getGuiManager().getGUI(player.getUniqueId()));
     }
 

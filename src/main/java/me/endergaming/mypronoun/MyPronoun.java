@@ -1,7 +1,6 @@
 package me.endergaming.mypronoun;
 
 import me.endergaming.enderlibs.event.ListenerManager;
-import me.endergaming.enderlibs.file.FileManager;
 import me.endergaming.enderlibs.text.MessageUtils;
 import me.endergaming.mypronoun.commands.CommandRegistry;
 import me.endergaming.mypronoun.controllers.ConfigController;
@@ -26,20 +25,14 @@ public final class MyPronoun extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        // Plugin startup logic
-
         // Register Commands
-        if (!Bukkit.getPluginManager().isPluginEnabled("EnderLibs")) {
-            log(MessageUtils.LogLevel.SEVERE, "EnderLibs is not enabled!");
-        } else {
-            log(MessageUtils.LogLevel.INFO, "&dRegistering commands &f(1/4)");
-            commandRegistry.register();
-        }
+        MessageUtils.log(MessageUtils.LogLevel.INFO, "&dRegistering commands &f(1/4)");
+        commandRegistry.register();
         // Setup Files
         try {
             configController.init();
             responseController.init();
-            log(MessageUtils.LogLevel.INFO, "&dSetting up configs &f(2/4)");
+            MessageUtils.log(MessageUtils.LogLevel.INFO, "&dSetting up configs &f(2/4)");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -49,13 +42,13 @@ public final class MyPronoun extends JavaPlugin {
         listenerManager.register(new OnPlayerJoin(this));
         // Initializing GUI
         guiManager.init();
-        log(MessageUtils.LogLevel.INFO, "&dConfiguring GUI &f(3/4)");
+        MessageUtils.log(MessageUtils.LogLevel.INFO, "&dConfiguring GUI &f(3/4)");
         // Register Placeholder
         if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
             new PlaceholderAPI(this).register();
-            log(MessageUtils.LogLevel.INFO, "&dEnabling PlaceholderAPI &f(4/4)");
+            MessageUtils.log(MessageUtils.LogLevel.INFO, "&dEnabling PlaceholderAPI &f(4/4)");
         } else {
-            log(MessageUtils.LogLevel.WARNING, "&cPlaceholderAPI could not be enabled! &f(4/4)");
+            MessageUtils.log(MessageUtils.LogLevel.WARNING, "&cCannot enable placeholders please install PlaceholderAPI. &f(4/4)");
         }
     }
 
@@ -89,9 +82,5 @@ public final class MyPronoun extends JavaPlugin {
 
     public ResponseController getResponseController() {
         return responseController;
-    }
-
-    public static void log(MessageUtils.LogLevel logLevel, String message) {
-        MessageUtils.log(logLevel, message, "&b" + JavaPlugin.getPlugin(MyPronoun.class).getName() + " ");
     }
 }

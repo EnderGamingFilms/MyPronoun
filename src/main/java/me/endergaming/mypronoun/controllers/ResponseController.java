@@ -1,6 +1,6 @@
 package me.endergaming.mypronoun.controllers;
 
-import me.endergaming.enderlibs.file.FileManager;
+import me.endergaming.enderlibs.file.FileUtils;
 import me.endergaming.mypronoun.MyPronoun;
 import me.endergaming.mypronoun.storage.Pronoun;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -40,7 +40,7 @@ public class ResponseController {
     }
 
     public void init() {
-        config = FileManager.getConfig("messages", "yml");
+        config = FileUtils.getConfig("messages", "yml");
         // Parse teams
         this.setMessages();
     }

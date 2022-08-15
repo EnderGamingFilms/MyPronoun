@@ -11,8 +11,6 @@ import org.jetbrains.annotations.NotNull;
 import java.io.File;
 import java.util.UUID;
 
-import static me.endergaming.mypronoun.MyPronoun.log;
-
 public class StorageHelper {
     private final MyPronoun plugin;
     protected SQLHelper sql;
@@ -32,7 +30,7 @@ public class StorageHelper {
             ConfigurationSection config = plugin.getConfigController().getConfig().getConfigurationSection("MySQL");
 
             if (config == null) {
-                log(MessageUtils.LogLevel.SEVERE, "There was an issue setting up MySQL");
+                MessageUtils.log(MessageUtils.LogLevel.SEVERE, "There was an issue setting up MySQL");
                 return;
             }
 
@@ -42,10 +40,11 @@ public class StorageHelper {
             String user = config.getString("Username");
             String pass = config.getString("Password");
             boolean useSSL = config.getBoolean("useSSL");
-            if (ConfigController.debug)
+            if (ConfigController.debug) {
                 sql = new SQLHelper(SQLHelper.openMySQL(user, pass, db)); // localhost database
-            else
+            } else {
                 sql = new SQLHelper(SQLHelper.openMySQL(host, port, user, pass, db, useSSL)); // normal database
+            }
         }
 
         createTable();
@@ -54,14 +53,15 @@ public class StorageHelper {
 
         sql.setCommitInterval(plugin.getConfigController().getConfig().getInt("Update") == 0 ? -1 : plugin.getConfigController().getConfig().getInt("Update"));
 
-        if (isConnected())
-            log(MessageUtils.LogLevel.INFO, "&aDatabase connected");
-        else
-            log(MessageUtils.LogLevel.SEVERE, "&cFailed to connect to storage database");
+        if (isConnected()) {
+            MessageUtils.log(MessageUtils.LogLevel.INFO, "&aDatabase connected");
+        } else {
+            MessageUtils.log(MessageUtils.LogLevel.SEVERE, "&cFailed to connect to storage database");
+        }
     }
 
     public boolean isConnected() {
-         return sql != null && sql.getConnection() != null;
+        return sql != null && sql.getConnection() != null;
     }
 
     public SQLHelper getSql() {
@@ -87,15 +87,21 @@ public class StorageHelper {
     }
 
     public void setPronoun(UUID uuid, int pronounID) {
-        if (!playerExists(uuid)) createPlayer(uuid);
+        if (!playerExists(uuid)) {
+            createPlayer(uuid);
+        }
         playerCache.update(pronounID, uuid);
 //        sql.execute("UPDATE my_pronoun SET pronoun_id=? WHERE uuid=?", pronounID, uuid);
     }
 
     public int getPronounID(UUID uuid) {
-        if (!playerExists(uuid)) createPlayer(uuid);
+        if (!playerExists(uuid)) {
+            createPlayer(uuid);
+        }
         Object mem = playerCache.select(uuid);
-        if (mem == null) return -1;
+        if (mem == null) {
+            return -1;
+        }
         return playerCache.<Integer>select(uuid);
 //        return sql.querySingleResultLong("SELECT pronoun_id FROM my_pronoun WHERE uuid=?", uuid).intValue();
     }

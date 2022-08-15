@@ -27,7 +27,7 @@ public class SelectionGUI {
     }
 
     public void initialize() {
-        inventory_name = MessageUtils.colorize("&9Pronoun Selection");
+        inventory_name = MessageUtils.color("&9Pronoun Selection");
     }
 
     public Inventory GUI(int activePronoun) {

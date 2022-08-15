@@ -30,11 +30,11 @@ public class Pronoun {
     public ItemStack getGUIItem() {
         ItemStack itemStack = new ItemStack(display);
         ItemMeta meta = itemStack.getItemMeta();
-        List<String> matLore = Arrays.asList(" ", MessageUtils.colorize("&dDo you prefer as &n" + pronoun + "&d?"));
+        List<String> matLore = Arrays.asList(" ", MessageUtils.color("&dDo you prefer as &n" + pronoun + "&d?"));
 
         if (meta != null) {
             meta.getPersistentDataContainer().set(JavaPlugin.getPlugin(MyPronoun.class).getPronounKey(), PersistentDataType.INTEGER, id);
-            meta.setDisplayName(MessageUtils.colorize(color + "&l" + pronoun));
+            meta.setDisplayName(MessageUtils.color(color + "&l" + pronoun));
             meta.setLore(matLore);
         }
 
