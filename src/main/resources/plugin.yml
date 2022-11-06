@@ -1,6 +1,6 @@
 name: MyPronoun
 version: ${project.version}
 main: me.endergaming.mypronoun.MyPronoun
-authors: [ EnderGamingYT ]
+author: [ EnderGamingYT ]
 api-version: 1.16
-softdepend: [PlaceholderAPI, EnderLibs]
+depend: [PlaceholderAPI, EnderLibs]
